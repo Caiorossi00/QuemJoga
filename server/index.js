@@ -6,7 +6,12 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "*" }));
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("API funcionando!");
+});
 
 const getLeagues = async () => {
   try {
@@ -19,7 +24,6 @@ const getLeagues = async () => {
         },
       }
     );
-
     return response.data.response;
   } catch (error) {
     console.error(
@@ -33,23 +37,17 @@ const getLeagues = async () => {
 app.get("/api/leagues", async (req, res) => {
   try {
     const leagues = await getLeagues();
-
-    if (!leagues || leagues.length === 0) {
+    if (!leagues.length) {
       return res.status(404).json({ message: "Nenhuma liga encontrada." });
     }
-
-    const formattedLeagues = leagues.map((league) => ({
-      id: league.league.id,
-      nome: league.league.name,
-      país: league.country.name,
-    }));
-
-    res.json(formattedLeagues);
-  } catch (error) {
-    console.error(
-      "Erro ao buscar ligas:",
-      error.response?.data || error.message
+    res.json(
+      leagues.map((league) => ({
+        id: league.league.id,
+        nome: league.league.name,
+        pais: league.country.name,
+      }))
     );
+  } catch (error) {
     res.status(500).json({ message: "Erro ao buscar ligas." });
   }
 });
@@ -66,7 +64,6 @@ const getGamesByLeague = async (leagueId, season) => {
         },
       }
     );
-
     return response.data.response;
   } catch (error) {
     console.error(
@@ -84,23 +81,15 @@ app.get("/api/games/:leagueId", async (req, res) => {
 
   try {
     const games = await getGamesByLeague(leagueId, season);
-
-    if (!games || games.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Nenhum jogo encontrado para hoje." });
-    }
-
     const gamesToday = games.filter((game) =>
       game.fixture.date.startsWith(today)
     );
-
-    res.json(gamesToday);
-  } catch (error) {
-    console.error(
-      "Erro ao buscar jogos:",
-      error.response?.data || error.message
+    res.json(
+      gamesToday.length
+        ? gamesToday
+        : { message: "Nenhum jogo encontrado para hoje." }
     );
+  } catch (error) {
     res.status(500).json({ message: "Erro ao buscar jogos." });
   }
 });
@@ -108,3 +97,5 @@ app.get("/api/games/:leagueId", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+module.exports = app;
