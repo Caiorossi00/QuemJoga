@@ -1,0 +1,70 @@
+#Leagues {
+  background-color: white;
+  width: 420px;
+  height: 285px;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+    border-radius: 10px;
+  }
+
+  h1 {
+    padding-top: 30px;
+    padding-left: 25px;
+  }
+}
+
+#leagues-display {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  gap: 5px;
+  margin-bottom: 3vh;
+  max-height: 300px;
+  overflow-y: auto;
+
+  .league {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 80%;
+    border-radius: 14px;
+    padding-left: 1em;
+    padding: 0.7em 1em;
+    background-color: #8bc6ec;
+    background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    img {
+      width: 25px;
+      height: 30px;
+    }
+
+    p {
+      color: white;
+      font-size: 0.9em;
+      margin-top: 2px;
+    }
+  }
+}

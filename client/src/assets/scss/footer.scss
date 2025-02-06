@@ -1,0 +1,116 @@
+.footer {
+  color: #000000;
+  text-align: center;
+  width: 150px;
+}
+
+#logo {
+  background-color: #fcfbfc;
+  padding: 1em;
+  border-radius: 24px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+#footer-text {
+  display: flex;
+  background-color: white;
+  border-radius: 24px;
+  height: 425px;
+  width: 150px;
+  flex-direction: column;
+  gap: 1em;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  .credits {
+    margin: 0 auto;
+    font-family: "AgrandirRegular";
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    align-items: center;
+    font-size: large;
+    height: 60%;
+    margin-top: 40px;
+    font-size: 1.2em;
+  }
+
+  .follow-text {
+    margin: 0 10%;
+  }
+
+  .instagram-gradient {
+    background: linear-gradient(
+      45deg,
+      #f09433,
+      #e6683c,
+      #dc2743,
+      #cc2366,
+      #bc1888
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .instagram-gradient:hover {
+    background: linear-gradient(
+      45deg,
+      #ff1e56,
+      #e6683c,
+      #dc2743,
+      #cc2366,
+      #bc1888
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  img {
+    width: 120px;
+    transition: transform 0.3s ease;
+  }
+
+  img:hover {
+    transform: scale(1.07);
+  }
+}
+
+.follow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+
+  .fa-instagram {
+    font-size: 2em;
+    transition: color 0.3s ease;
+  }
+
+  .fa-instagram:hover {
+    color: #bc1888;
+  }
+
+  p {
+    font-size: 13px;
+    transition: color 0.3s ease;
+  }
+
+  p:hover {
+    color: #bc1888;
+  }
+}

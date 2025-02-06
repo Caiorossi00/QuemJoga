@@ -1,0 +1,29 @@
+#UI {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 2em;
+  font-family: "AgrandirTextBold", sans-serif;
+  gap: 2em;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin-top: -10px;
+}
+
+#main {
+  display: flex;
+  gap: 1em;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  div {
+    display: flex;
+    gap: 1em;
+  }
+}
