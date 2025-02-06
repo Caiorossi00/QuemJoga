@@ -10,7 +10,9 @@ const Header = ({ onSendMessage }) => {
   useEffect(() => {
     const fetchLigas = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/leagues");
+        const response = await axios.get(
+          "https://quem-joga-server.vercel.app/api/leagues"
+        );
         setLigas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as ligas:", error);
@@ -40,7 +42,7 @@ const Header = ({ onSendMessage }) => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/games/${ligaSelecionada.id}`
+        `https://quem-joga-server.vercel.app/api/games/${ligaSelecionada.id}`
       );
 
       const gamesData = response.data;
