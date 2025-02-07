@@ -9,7 +9,9 @@ const Leagues = () => {
   useEffect(() => {
     const fetchLigas = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/leagues");
+        const response = await axios.get(
+          "https://quem-joga-server.vercel.app/api/leagues"
+        );
         setLigas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as ligas:", error);
