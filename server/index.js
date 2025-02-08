@@ -81,9 +81,22 @@ app.get("/api/games/:leagueId", async (req, res) => {
 
   try {
     const games = await getGamesByLeague(leagueId, season);
-    const gamesToday = games.filter((game) =>
-      game.fixture.date.startsWith(today)
-    );
+    const gamesToday = games
+      .filter((game) => game.fixture.date.startsWith(today))
+      .map((game) => ({
+        id: game.fixture.id,
+        data: game.fixture.date,
+        estadio: game.fixture.venue.name,
+        time_casa: {
+          nome: game.teams.home.name,
+          escudo: game.teams.home.logo,
+        },
+        time_fora: {
+          nome: game.teams.away.name,
+          escudo: game.teams.away.logo,
+        },
+      }));
+
     res.json(
       gamesToday.length
         ? gamesToday

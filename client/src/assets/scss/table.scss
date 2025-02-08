@@ -35,17 +35,55 @@
     background-color: #8bc6ec;
     background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
     width: 80%;
-    padding: 1.2em 1em;
+    padding: 0.5em 1em;
     border-radius: 14px;
     color: white;
-    gap: 10px;
     text-align: center;
     justify-content: center;
-    flex-wrap: wrap;
-    font-size: 0.8em;
+    font-size: 0.9em;
+    gap: 8px;
+    transition: transform 0.3s ease;
 
-    p {
-      width: fit-content;
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    .teams-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 30%;
+      margin-bottom: 4px;
+    }
+
+    .team-logo {
+      width: 35px;
+      height: 35px;
+      object-fit: contain;
+      margin: 0 auto;
+      margin-top: 3px;
+    }
+
+    .versus {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .teams-names {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      font-weight: bold;
+      font-size: 0.9em;
+      width: 90%;
+    }
+
+    .game-time {
+      font-size: 0.9em;
+      color: white;
+      font-weight: bold;
+      margin-top: 5px;
     }
   }
 }
