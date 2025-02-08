@@ -1,3 +1,6 @@
+<h1>Quem joga?</h1>
+<p>O Quem Joga? permite que os usuários acompanhem as ligas de futebol e os jogos programados para o dia atual. Ele oferece uma busca por liga, onde o usuário pode digitar o nome da liga desejada e, em seguida, visualizar os jogos programados para aquele dia. O app exibe informações detalhadas sobre os jogos, incluindo os times participantes, a hora do jogo e os logos das equipes. A interface é simples e fácil de usar, proporcionando uma experiência rápida e intuitiva para quem deseja se manter atualizado com os jogos de futebol.</p>
+
 <hr>
 
 <h1>Frontend</h1>
