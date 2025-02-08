@@ -3,7 +3,6 @@
 <br>
 
 <img src="https://github.com/Caiorossi00/QuemJoga/blob/main/QuemJoga.png?raw=true" alt="Interface do app quem joga" />
-Link: <a href="https://quemjoga.vercel.app">Quem joga?</a>
 <br>
 
 <hr>
