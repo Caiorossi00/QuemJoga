@@ -42,7 +42,6 @@ const getLeagues = async () => {
         },
       }
     );
-    console.log("Resposta da API-Football:", response.data);
 
     return response.data.response;
   } catch (error) {
