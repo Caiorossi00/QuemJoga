@@ -80,3 +80,21 @@
 
   <h3><code>GET /api/games/:leagueId</code></h3>
   <p>Retorna os jogos programados para o dia atual para uma liga específica.</p>
+
+<hr>
+<h2>Atualizações em 07/08</h2>
+
+<p>No dia <strong>07/08</strong>, com mais conhecimento e experiência adquiridos, retornei ao projeto para corrigir e aprimorar alguns aspectos da aplicação. As principais melhorias e correções realizadas foram:</p>
+
+<ul>
+  <li><strong>Correção do CORS</strong> no backend para permitir requisições da aplicação frontend hospedada em diferentes domínios (local e produção).</li>
+  
+  <li><strong>Implementação do uso de variáveis de ambiente</strong> para configuração dinâmica das URLs da API, facilitando o desenvolvimento local e o deploy em produção.</li>
+  
+  <li><strong>Ajuste no frontend</strong> para consumir a API usando a variável de ambiente <code>REACT_APP_API_URL</code>, garantindo que as chamadas funcionem corretamente tanto localmente quanto em ambiente de produção.</li>
+  
+  <li><strong>Integração dos dados da API com imagens locais</strong> das ligas, para exibir logos e imagens mesmo quando a API não fornece imagens.</li>
+  
+  <li><strong>Melhorias na experiência do usuário</strong> na busca por ligas e na exibição de jogos, incluindo tratamento de erros e mensagens mais claras.</li>
+</ul>
+
