@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ligasDisplay from "../assets/data";
 import "../assets/scss/leagues.scss";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Leagues = () => {
   const [ligas, setLigas] = useState([]);
@@ -9,9 +10,7 @@ const Leagues = () => {
   useEffect(() => {
     const fetchLigas = async () => {
       try {
-        const response = await axios.get(
-          "https://quem-joga-server.vercel.app/api/leagues"
-        );
+        const response = await axios.get(`${API_URL}/api/leagues`);
         setLigas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as ligas:", error);
@@ -26,10 +25,9 @@ const Leagues = () => {
       <h1>Mais Buscadas</h1>
 
       <div id="leagues-display">
-        {ligasDisplay.length > 0 ? (
-          ligasDisplay.map((league) => (
+        {ligas.length > 0 ? (
+          ligas.map((league) => (
             <div key={league.id} className="league">
-              <img src={league.foto} alt={league.nome} />
               <p>{league.nome}</p>
             </div>
           ))

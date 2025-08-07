@@ -6,7 +6,25 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? [process.env.FRONTEND_URL_PROD]
+    : [process.env.FRONTEND_URL_LOCAL];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = `O CORS para origem ${origin} não está permitido.`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -24,6 +42,8 @@ const getLeagues = async () => {
         },
       }
     );
+    console.log("Resposta da API-Football:", response.data);
+
     return response.data.response;
   } catch (error) {
     console.error(
@@ -35,11 +55,16 @@ const getLeagues = async () => {
 };
 
 app.get("/api/leagues", async (req, res) => {
+  console.log("Rota /api/leagues chamada");
+
   try {
     const leagues = await getLeagues();
+    console.log("Ligas recebidas:", leagues.length);
+
     if (!leagues.length) {
       return res.status(404).json({ message: "Nenhuma liga encontrada." });
     }
+
     res.json(
       leagues.map((league) => ({
         id: league.league.id,
@@ -48,6 +73,7 @@ app.get("/api/leagues", async (req, res) => {
       }))
     );
   } catch (error) {
+    console.error("Erro na rota /api/leagues:", error.message);
     res.status(500).json({ message: "Erro ao buscar ligas." });
   }
 });

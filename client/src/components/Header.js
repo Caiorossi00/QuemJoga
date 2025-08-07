@@ -3,6 +3,8 @@ import suarez from "../assets/images/suarez.png";
 import axios from "axios";
 import "../assets/scss/header.scss";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Header = ({ onSendMessage }) => {
   const [inputValue, setInputValue] = useState("");
   const [ligas, setLigas] = useState([]);
@@ -10,20 +12,20 @@ const Header = ({ onSendMessage }) => {
   useEffect(() => {
     const fetchLigas = async () => {
       try {
-        const response = await axios.get(
-          "https://quem-joga-server.vercel.app/api/leagues"
-        );
+        const response = await axios.get(`${API_URL}/api/leagues`);
         setLigas(response.data);
       } catch (error) {
         console.error("Erro ao buscar as ligas:", error);
+        onSendMessage("Erro ao carregar ligas. Tente recarregar a página.");
       }
     };
 
     fetchLigas();
-  }, []);
+  }, [onSendMessage]);
 
   const handleSendMessage = async () => {
-    if (inputValue.trim() === "") return;
+    const query = inputValue.trim().toLowerCase();
+    if (query === "") return;
 
     if (!Array.isArray(ligas) || ligas.length === 0) {
       onSendMessage("Ligas ainda não carregadas. Tente novamente.");
@@ -31,7 +33,7 @@ const Header = ({ onSendMessage }) => {
     }
 
     const ligaSelecionada = ligas.find(
-      (liga) => liga.nome.toLowerCase() === inputValue.toLowerCase()
+      (liga) => liga.nome.toLowerCase() === query
     );
 
     if (!ligaSelecionada) {
@@ -42,13 +44,15 @@ const Header = ({ onSendMessage }) => {
 
     try {
       const response = await axios.get(
-        `https://quem-joga-server.vercel.app/api/games/${ligaSelecionada.id}`
+        `${API_URL}/api/games/${ligaSelecionada.id}`
       );
 
       const gamesData = response.data;
 
-      if (!gamesData || gamesData.length === 0) {
+      if (!gamesData || (Array.isArray(gamesData) && gamesData.length === 0)) {
         onSendMessage("Nenhum jogo encontrado para hoje.");
+      } else if (gamesData.message) {
+        onSendMessage(gamesData.message);
       } else {
         onSendMessage(null, gamesData);
       }
@@ -77,8 +81,9 @@ const Header = ({ onSendMessage }) => {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Digite aqui..."
             onKeyPress={handleKeyPress}
+            autoComplete="off"
           />
-          <button onClick={handleSendMessage}>
+          <button onClick={handleSendMessage} aria-label="Buscar liga">
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
